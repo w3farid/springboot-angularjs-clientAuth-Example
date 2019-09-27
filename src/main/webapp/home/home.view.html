@@ -1,0 +1,80 @@
+
+<p>
+	<a href="/login" class="btn btn-default logout" ng-click="logout()">Logout</a>
+</p>
+<div class="container">
+	<div class="col-md-12">
+		<button type="button" class="btn btn-primary mb-5" data-toggle="modal"
+			data-target="#ToDoModal" data-whatever="@mdo">Add New to do</button>
+		<!-- task list -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">ToDo Title</th>
+					<th scope="col">Date</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in vm.todoItems">
+					<th scope="row">{{$index+1}}</th>
+					<td>{{x.toDoTitle}}</td>
+					<td>{{x.createdDate}}</td>
+					<td>
+						<a href="javascript:void(0)" ng-click="update()"
+						class="btn btn-link">Edit</a>
+						<a href="javascript:void(0)" ng-click="done(x.id, $index)"
+						class="btn btn-link">Done</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- modal -->
+
+	<div class="modal fade" id="ToDoModal" tabindex="-1" role="dialog"
+		aria-labelledby="ToDoModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Add New To Do</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+						<div class="form-group">
+							<label for="message-text" class="col-form-label">ToDo:</label>
+							<textarea class="form-control" id="message-text" ng-model="vm.todo.toDoTitle"></textarea>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="onToDo()">Add</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end modal -->
+</div>
+
+<script src="components/todo/ToDoController.js"></script>
+<script>
+	$('#ToDoModal').on('show.bs.modal', function(event) {
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var recipient = button.data('whatever') // Extract info from data-* attributes
+		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		var modal = $(this)
+	});
+</script>
+<style>
+	.logout {
+    position: absolute;
+    right: 2%;
+    top: 4%;
+}
+</style>
+
